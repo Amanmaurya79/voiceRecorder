@@ -46,8 +46,4 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
             isPlaying = false
         }
     }
-    
-    
-    
-    
 }
