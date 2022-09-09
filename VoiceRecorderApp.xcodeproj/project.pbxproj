@@ -75,7 +75,8 @@
 			children = (
 				0731439628C9E4FD00C1A9B1 /* Models */,
 				07376B6A28C9D248006DBBEA /* Views */,
-				07376B6C28C9D259006DBBEA /* ViewsModel */,
+				07376B6C28C9D259006DBBEA /* AudioManager */,
+				07D52EA928CB560000D802BA /* Extension */,
 				07376B7728C9D3C2006DBBEA /* Info.plist */,
 				07376B6028C9D1F7006DBBEA /* Assets.xcassets */,
 				07376B6228C9D1F7006DBBEA /* Preview Content */,
@@ -100,15 +101,22 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		07376B6C28C9D259006DBBEA /* ViewsModel */ = {
+		07376B6C28C9D259006DBBEA /* AudioManager */ = {
 			isa = PBXGroup;
 			children = (
 				0731439728C9E52400C1A9B1 /* AudioPlayer.swift */,
 				07376B6D28C9D298006DBBEA /* AudioRecorder.swift */,
 				07376B7128C9D2CE006DBBEA /* RecordingFetching.swift */,
+			);
+			path = AudioManager;
+			sourceTree = "<group>";
+		};
+		07D52EA928CB560000D802BA /* Extension */ = {
+			isa = PBXGroup;
+			children = (
 				07376B7328C9D2E3006DBBEA /* DateStringExtension.swift */,
 			);
-			path = ViewsModel;
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
