@@ -30,7 +30,7 @@ struct ContentView: View {
                     Image(systemName: "stop.fill")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 80, height: 80)
+                        .frame(width: 65, height: 65)
                         .clipped()
                         .foregroundColor(.red)
                         .padding(.bottom, 40)

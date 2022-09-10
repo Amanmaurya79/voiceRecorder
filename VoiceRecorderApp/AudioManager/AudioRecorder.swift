@@ -32,7 +32,6 @@ class AudioRecorder: NSObject, ObservableObject {
             print("Failed to set up recording session")
         }
         
-//       need to  Understand this part
         let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let audioFilename = documentPath.appendingPathComponent("\(Date().toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss")).m4a")
         
