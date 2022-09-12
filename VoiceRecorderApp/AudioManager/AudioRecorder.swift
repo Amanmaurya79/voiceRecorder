@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import Combine
 import AVFoundation
 
 class AudioRecorder: NSObject, ObservableObject {
@@ -48,10 +47,4 @@ class AudioRecorder: NSObject, ObservableObject {
             audioRecorder.stop()
             recording = false
         }
-    
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        if flag {
-            recording = false
-        }
-    }
 }
