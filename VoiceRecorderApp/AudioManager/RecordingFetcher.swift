@@ -9,10 +9,10 @@ import Foundation
 
 class RecordingFetcher: NSObject, ObservableObject {
     @Published  var recordings: [Recording] = []
-    
+
     override init() {
         super.init()
-        fetchRecordings()
+            fetchRecordings()
     }
     
     func fetchRecordings() {

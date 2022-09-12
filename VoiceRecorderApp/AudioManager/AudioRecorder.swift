@@ -11,11 +11,10 @@ import Combine
 import AVFoundation
 
 class AudioRecorder: NSObject, ObservableObject {
+    @Published var recording = false
+
     var audioRecorder: AVAudioRecorder!
-    @Published var recording = false 
-  
-   
-    
+
     func startRecording() {
         let recordingSession = AVAudioSession.sharedInstance()
         
@@ -39,7 +38,6 @@ class AudioRecorder: NSObject, ObservableObject {
         do {
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
             audioRecorder.record()
-            
             recording = true
         } catch {
             print("Could not start recording")
