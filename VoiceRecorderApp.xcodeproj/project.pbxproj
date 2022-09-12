@@ -17,6 +17,7 @@
 		07376B7228C9D2CE006DBBEA /* RecordingFetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07376B7128C9D2CE006DBBEA /* RecordingFetching.swift */; };
 		07376B7428C9D2E3006DBBEA /* DateStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07376B7328C9D2E3006DBBEA /* DateStringExtension.swift */; };
 		07376B7628C9D33F006DBBEA /* ListViewFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07376B7528C9D33F006DBBEA /* ListViewFile.swift */; };
+		07FF352928CD7DA200949580 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FF352828CD7DA200949580 /* AudioPlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		07376B7328C9D2E3006DBBEA /* DateStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateStringExtension.swift; sourceTree = "<group>"; };
 		07376B7528C9D33F006DBBEA /* ListViewFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewFile.swift; sourceTree = "<group>"; };
 		07376B7728C9D3C2006DBBEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		07FF352828CD7DA200949580 /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			children = (
 				07376B5E28C9D1F6006DBBEA /* ContentView.swift */,
 				07376B7528C9D33F006DBBEA /* ListViewFile.swift */,
+				07FF352828CD7DA200949580 /* AudioPlayerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				07376B5F28C9D1F6006DBBEA /* ContentView.swift in Sources */,
 				0731439828C9E52400C1A9B1 /* AudioPlayer.swift in Sources */,
 				07376B7228C9D2CE006DBBEA /* RecordingFetching.swift in Sources */,
+				07FF352928CD7DA200949580 /* AudioPlayerView.swift in Sources */,
 				07376B7428C9D2E3006DBBEA /* DateStringExtension.swift in Sources */,
 				07376B7628C9D33F006DBBEA /* ListViewFile.swift in Sources */,
 				07376B5D28C9D1F6006DBBEA /* VoiceRecorderAppApp.swift in Sources */,

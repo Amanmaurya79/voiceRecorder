@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ListViewFile: View {
-    @ObservedObject var recordingFetcher: RecordingFetcher = RecordingFetcher()
+    @StateObject var recordingFetcher: RecordingFetcher = RecordingFetcher()
     
     var body: some View {
         List {
@@ -33,6 +33,7 @@ struct ListViewFile: View {
 struct RecordingRow: View {
     var audioURL: URL
     var isCheck: Bool = false
+//    @State var isSheetPresented = false
     @ObservedObject var audioPlayer = AudioPlayer()
     var body: some View {
         HStack {
@@ -43,11 +44,15 @@ struct RecordingRow: View {
             Spacer()
             if audioPlayer.isPlaying == false {
                 Button {
+//                    isSheetPresented.toggle()
                     audioPlayer.startPlayback(audio: audioURL)
                 } label: {
                     Image(systemName: "play.circle")
                         .imageScale(.large)
                 }
+//                .sheet(isPresented: $isSheetPresented) {
+//                    AudioPlayerView()
+//                }
             } else {
                 Button {
                     audioPlayer.stopPlayback()

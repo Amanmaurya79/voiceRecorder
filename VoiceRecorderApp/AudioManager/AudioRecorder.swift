@@ -11,15 +11,9 @@ import Combine
 import AVFoundation
 
 class AudioRecorder: NSObject, ObservableObject {
-    
-    let objectWillChange = PassthroughSubject<AudioRecorder, Never>()
-
     var audioRecorder: AVAudioRecorder!
-    var recording = false {
-        didSet {
-            objectWillChange.send(self)
-        }
-    }
+    @Published var recording = false 
+  
    
     
     func startRecording() {

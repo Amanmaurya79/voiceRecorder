@@ -14,6 +14,7 @@ struct VoiceRecorderAppApp: App {
         WindowGroup {
             NavigationView {
                 ContentView(audioRecorder: audioRecorder, textSearch: "")
+                    .preferredColorScheme(.dark)
             }.navigationTitle("All Recordings")
         }
     }

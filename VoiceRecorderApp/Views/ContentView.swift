@@ -15,28 +15,19 @@ struct ContentView: View {
             SearchBar(textSearch: $textSearch)
             ListViewFile()
             Spacer()
-            if audioRecorder.recording == false {
-                Button(action: {self.audioRecorder.startRecording()}) {
-                    Image(systemName: "circle.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 80, height: 80)
-                        .clipped()
-                        .foregroundColor(.red)
-                        .padding(.bottom, 40)
-                }
-            } else {
-                Button(action: {self.audioRecorder.stopRecording()}) {
-                    Image(systemName: "stop.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 65, height: 65)
-                        .clipped()
-                        .foregroundColor(.red)
-                        .padding(.bottom, 40)
-                }
+            Button(action: {
+                audioRecorder.recording ? audioRecorder.stopRecording() : audioRecorder.startRecording()
+            }) {
+                Image(systemName: audioRecorder.recording ? "stop.fill" : "circle.fill" )
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 60, height: 60)
+                    .clipped()
+                    .foregroundColor(.red)
+                    .padding(.bottom, 40)
             }
         }
+        
     }
 }
 
@@ -46,7 +37,7 @@ struct SearchBar: View {
     var body: some View {
         HStack {
              Image(systemName: "magnifyingglass")
-             TextField("Search ...", text: $textSearch)
+            TextField("Search ...", text: $textSearch).foregroundColor(.white)
          }.padding(.leading, 13)
     }
 }
