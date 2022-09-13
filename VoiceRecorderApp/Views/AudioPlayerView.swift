@@ -36,18 +36,6 @@ struct AudioPlayerView: View {
     }
 }
 
-enum ImageFrame: CGFloat {
-    case collapse = 30
-    case expanded = 80
-}
-
-//struct DynamicIslandView: View {
-//    @Binding var expanded: Bool
-//    var body: some View {
-//        VStack {
-//
-//    }
-//}
 struct AudioPlayerView_Previews: PreviewProvider {
     static var previews: some View {
         AudioPlayerView()

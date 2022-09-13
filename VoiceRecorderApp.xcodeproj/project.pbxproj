@@ -14,9 +14,9 @@
 		07376B6428C9D1F7006DBBEA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07376B6328C9D1F7006DBBEA /* Preview Assets.xcassets */; };
 		07376B6E28C9D298006DBBEA /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07376B6D28C9D298006DBBEA /* AudioRecorder.swift */; };
 		07376B7028C9D2B4006DBBEA /* RecordingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07376B6F28C9D2B4006DBBEA /* RecordingModel.swift */; };
-		07376B7228C9D2CE006DBBEA /* RecordingFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07376B7128C9D2CE006DBBEA /* RecordingFetcher.swift */; };
 		07376B7428C9D2E3006DBBEA /* DateStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07376B7328C9D2E3006DBBEA /* DateStringExtension.swift */; };
 		07376B7628C9D33F006DBBEA /* ListViewFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07376B7528C9D33F006DBBEA /* ListViewFile.swift */; };
+		0737B2D428D065F800C781B3 /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0737B2D328D065F800C781B3 /* AudioService.swift */; };
 		07FF352928CD7DA200949580 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FF352828CD7DA200949580 /* AudioPlayerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,10 +29,10 @@
 		07376B6328C9D1F7006DBBEA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		07376B6D28C9D298006DBBEA /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		07376B6F28C9D2B4006DBBEA /* RecordingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingModel.swift; sourceTree = "<group>"; };
-		07376B7128C9D2CE006DBBEA /* RecordingFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingFetcher.swift; sourceTree = "<group>"; };
 		07376B7328C9D2E3006DBBEA /* DateStringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateStringExtension.swift; sourceTree = "<group>"; };
 		07376B7528C9D33F006DBBEA /* ListViewFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewFile.swift; sourceTree = "<group>"; };
 		07376B7728C9D3C2006DBBEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0737B2D328D065F800C781B3 /* AudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
 		07FF352828CD7DA200949580 /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,6 +75,7 @@
 		07376B5B28C9D1F6006DBBEA /* VoiceRecorderApp */ = {
 			isa = PBXGroup;
 			children = (
+				0737B2D228D065E200C781B3 /* Services */,
 				0731439628C9E4FD00C1A9B1 /* Models */,
 				07376B6A28C9D248006DBBEA /* Views */,
 				07376B6C28C9D259006DBBEA /* AudioManager */,
@@ -109,9 +110,16 @@
 			children = (
 				0731439728C9E52400C1A9B1 /* AudioPlayer.swift */,
 				07376B6D28C9D298006DBBEA /* AudioRecorder.swift */,
-				07376B7128C9D2CE006DBBEA /* RecordingFetcher.swift */,
 			);
 			path = AudioManager;
+			sourceTree = "<group>";
+		};
+		0737B2D228D065E200C781B3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0737B2D328D065F800C781B3 /* AudioService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		07D52EA928CB560000D802BA /* Extension */ = {
@@ -192,11 +200,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0737B2D428D065F800C781B3 /* AudioService.swift in Sources */,
 				07376B6E28C9D298006DBBEA /* AudioRecorder.swift in Sources */,
 				07376B7028C9D2B4006DBBEA /* RecordingModel.swift in Sources */,
 				07376B5F28C9D1F6006DBBEA /* ContentView.swift in Sources */,
 				0731439828C9E52400C1A9B1 /* AudioPlayer.swift in Sources */,
-				07376B7228C9D2CE006DBBEA /* RecordingFetcher.swift in Sources */,
 				07FF352928CD7DA200949580 /* AudioPlayerView.swift in Sources */,
 				07376B7428C9D2E3006DBBEA /* DateStringExtension.swift in Sources */,
 				07376B7628C9D33F006DBBEA /* ListViewFile.swift in Sources */,

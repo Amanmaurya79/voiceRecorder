@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ListViewFile: View {
-    @ObservedObject var recordingFetcher: RecordingFetcher = RecordingFetcher()
+    @StateObject var audioRecorder: AudioRecorder
     var body: some View {
         List {
-            ForEach(recordingFetcher.recordings, id: \.createdAt) { recording in
+            ForEach(audioRecorder.recordings, id: \.createdAt) { recording in
                 RecordingRow(audioURL: recording.fileURL)
             }
             .onDelete(perform: delete)
@@ -21,9 +21,9 @@ struct ListViewFile: View {
     func delete(at offsets: IndexSet) {
         var urlsToDelete = [URL]()
         for index in offsets {
-            urlsToDelete.append(recordingFetcher.recordings[index].fileURL)
+            urlsToDelete.append(audioRecorder.recordings[index].fileURL)
         }
-        recordingFetcher.deleteRecording(urlsToDelete: urlsToDelete)
+        audioRecorder.deleteRecording(urlsToDelete: urlsToDelete)
     }
     
 }
@@ -50,8 +50,8 @@ struct RecordingRow: View {
 }
 
 struct ListViewFile_Previews: PreviewProvider {
-    @ObservedObject static var recorder: RecordingFetcher = RecordingFetcher() 
+    @StateObject static var audioRecorder: AudioRecorder = AudioRecorder()
     static var previews: some View {
-        ListViewFile(recordingFetcher: recorder)
+        ListViewFile(audioRecorder: audioRecorder)
     }
 }
