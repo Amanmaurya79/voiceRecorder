@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var audioRecorder: AudioRecorder
+    @StateObject var audioRecorder: AudioRecorder
     @State var textSearch: String
     var body: some View {
         VStack {

@@ -30,9 +30,8 @@ struct ListViewFile: View {
 
 
 struct RecordingRow: View {
+    @StateObject var audioPlayer = AudioPlayer()
     var audioURL: URL
-    var isCheck: Bool = false
-    @ObservedObject var audioPlayer = AudioPlayer()
     var body: some View {
         HStack {
             VStack {

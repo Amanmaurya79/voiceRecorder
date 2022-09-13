@@ -24,19 +24,9 @@ class RecordingFetcher: NSObject, ObservableObject {
             let recording = Recording(fileURL: audio, createdAt: getCreationDate(for: audio))
                 recordings.append(recording)
         }
-        
         recordings.sort(by: { $0.createdAt.compare($1.createdAt) == .orderedAscending})
     }
-//  HelperForDate
-    func getCreationDate(for file: URL) -> Date {
-        if let attributes = try? FileManager.default.attributesOfItem(atPath: file.path) as [FileAttributeKey: Any],
-           let creationDate = attributes[FileAttributeKey.creationDate] as? Date {
-            return creationDate
-        } else {
-            return Date()
-        }
-    }
-    
+
     func deleteRecording(urlsToDelete: [URL]) {
         for url in urlsToDelete {
             print(url)

@@ -11,9 +11,9 @@ import AVFoundation
 
 class AudioRecorder: NSObject, ObservableObject {
     @Published var recording = false
-
+    
     var audioRecorder: AVAudioRecorder!
-
+    
     func startRecording() {
         let recordingSession = AVAudioSession.sharedInstance()
         
@@ -44,7 +44,7 @@ class AudioRecorder: NSObject, ObservableObject {
     }
     
     func stopRecording() {
-            audioRecorder.stop()
-            recording = false
-        }
+        audioRecorder.stop()
+        recording = false
+    }
 }
