@@ -30,7 +30,7 @@ struct ListViewFile: View {
 
 
 struct RecordingRow: View {
-    @StateObject var audioPlayer = AudioPlayer()
+    @ObservedObject var audioRecorder: AudioRecorder = AudioRecorder()
     var audioURL: URL
     var body: some View {
         HStack {
@@ -40,9 +40,9 @@ struct RecordingRow: View {
             }
             Spacer()
             Button(action: {
-                audioPlayer.isPlaying ?  audioPlayer.stopPlayback() : audioPlayer.startPlayback(audio: audioURL)
+                audioRecorder.isPlaying ?  audioRecorder.stopPlayback() : audioRecorder.startPlayback(audio: audioURL)
             }) {
-                Image(systemName: audioPlayer.isPlaying ? "stop.fill" : "play.circle"  )
+                Image(systemName: audioRecorder.isPlaying ? "stop.fill" : "play.circle"  )
                     .imageScale(.large)
             }
         }
