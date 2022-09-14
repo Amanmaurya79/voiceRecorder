@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ListViewFile: View {
-    @StateObject var audioRecorder: AudioRecorder
+    @StateObject var recorderViewModel: RecorderViewModel
     var body: some View {
         List {
-            ForEach(audioRecorder.recordings, id: \.createdAt) { recording in
-                RecordingRow(audioURL: recording.fileURL)
+            ForEach(recorderViewModel.recordings, id: \.createdAt) { recording in
+                RecordingRow(recorderViewModel: recorderViewModel, audioURL: recording.fileURL)
             }
             .onDelete(perform: delete)
         }.navigationTitle("All Recording")
@@ -21,17 +21,19 @@ struct ListViewFile: View {
     func delete(at offsets: IndexSet) {
         var urlsToDelete = [URL]()
         for index in offsets {
-            urlsToDelete.append(audioRecorder.recordings[index].fileURL)
+            urlsToDelete.append(recorderViewModel.recordings[index].fileURL)
         }
-        audioRecorder.deleteRecording(urlsToDelete: urlsToDelete)
+        recorderViewModel.deleteRecording(urlsToDelete: urlsToDelete)
     }
     
 }
 
 
 struct RecordingRow: View {
-    @ObservedObject var audioRecorder: AudioRecorder = AudioRecorder()
+    @StateObject var recorderViewModel: RecorderViewModel
     var audioURL: URL
+    @State var audioIsPlaying: Bool = false
+//    need to give better name
     var body: some View {
         HStack {
             VStack {
@@ -40,9 +42,10 @@ struct RecordingRow: View {
             }
             Spacer()
             Button(action: {
-                audioRecorder.isPlaying ?  audioRecorder.stopPlayback() : audioRecorder.startPlayback(audio: audioURL)
+                audioIsPlaying.toggle()
+                recorderViewModel.isPlaying ?  recorderViewModel.stopPlayback() : recorderViewModel.startPlayback(audio: audioURL)
             }) {
-                Image(systemName: audioRecorder.isPlaying ? "stop.fill" : "play.circle"  )
+                Image(systemName: audioIsPlaying ? "stop.fill" : "play.circle"  )
                     .imageScale(.large)
             }
         }
@@ -50,8 +53,8 @@ struct RecordingRow: View {
 }
 
 struct ListViewFile_Previews: PreviewProvider {
-    @StateObject static var audioRecorder: AudioRecorder = AudioRecorder()
+    @StateObject static var recorderViewModel: RecorderViewModel = RecorderViewModel()
     static var previews: some View {
-        ListViewFile(audioRecorder: audioRecorder)
+        ListViewFile(recorderViewModel: recorderViewModel)
     }
 }

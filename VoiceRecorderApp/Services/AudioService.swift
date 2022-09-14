@@ -8,13 +8,10 @@
 import Foundation
 import AVFoundation
 
-protocol AudioPlayerProtocol {
-    func startPlayback (audio: URL)
-    func stopPlayback()
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool)
-}
 
-extension AudioRecorder: AudioPlayerProtocol {
+class AudioPlayerServices: NSObject, AVAudioPlayerDelegate {
+    var audioPlayer: AVAudioPlayer!
+    
     func startPlayback(audio: URL) {
         let playbackSession = AVAudioSession.sharedInstance()
         
@@ -28,7 +25,6 @@ extension AudioRecorder: AudioPlayerProtocol {
             audioPlayer = try AVAudioPlayer(contentsOf: audio)
             audioPlayer.delegate = self
             audioPlayer.play()
-            isPlaying = true
         } catch {
             print("Playback failed.")
         }
@@ -37,13 +33,6 @@ extension AudioRecorder: AudioPlayerProtocol {
     
     func stopPlayback() {
         audioPlayer.stop()
-        isPlaying = false
     }
-    
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        if flag {
-            isPlaying = false
-        }
-    }  
 }
 

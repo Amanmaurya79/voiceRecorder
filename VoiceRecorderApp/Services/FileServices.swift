@@ -6,18 +6,11 @@
 //
 
 import Foundation
-import AVFoundation
 
-protocol AudioFetcherServicesProtocol {
-    func fetchRecordings()
-    func deleteRecording(urlsToDelete: [URL])
-}
-
-extension AudioRecorder: AudioFetcherServicesProtocol {
+class FileServices {
     
-    func fetchRecordings() {
-        recordings.removeAll()
-        
+    func fetchRecordings() -> [Recording] {
+        var recordings: [Recording] = []
         let fileManager = FileManager.default
         let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let directoryContents = try! fileManager.contentsOfDirectory(at: documentDirectory, includingPropertiesForKeys: nil)
@@ -26,6 +19,7 @@ extension AudioRecorder: AudioFetcherServicesProtocol {
                 recordings.append(recording)
         }
         recordings.sort(by: { $0.createdAt.compare($1.createdAt) == .orderedAscending})
+        return recordings
     }
     
     func deleteRecording(urlsToDelete: [URL]) {
@@ -37,7 +31,5 @@ extension AudioRecorder: AudioFetcherServicesProtocol {
                 print("File could not be deleted!")
             }
         }
-        fetchRecordings()
     }
-    
 }

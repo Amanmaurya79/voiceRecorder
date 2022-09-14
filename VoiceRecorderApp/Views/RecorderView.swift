@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @StateObject var audioRecorder: AudioRecorder = AudioRecorder()
+struct RecorderView: View {
+    @StateObject var recorderViewModel: RecorderViewModel
     @State var textSearch: String
     var body: some View {
         VStack {
             SearchBar(textSearch: $textSearch)
-            ListViewFile(audioRecorder: audioRecorder)
+            ListViewFile(recorderViewModel: recorderViewModel)
             Spacer()
             Button(action: {
-                audioRecorder.recording ? audioRecorder.stopRecording() : audioRecorder.startRecording()
+                recorderViewModel.isRecording ? recorderViewModel.stopRecording() : recorderViewModel.startRecording()
             }) {
-                Image(systemName: audioRecorder.recording ? "stop.fill" : "circle.fill" )
+                Image(systemName: recorderViewModel.isRecording ? "stop.fill" : "circle.fill" )
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 60, height: 60)
@@ -41,11 +41,11 @@ struct SearchBar: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    @StateObject static var audioRecorder: AudioRecorder = AudioRecorder()
-    static var previews: some View {
-        NavigationView {
-            ListViewFile(audioRecorder: audioRecorder)
-        }
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    @StateObject static var audioRecorder: RecorderViewModel = RecorderViewModel()
+//    static var previews: some View {
+//        NavigationView {
+//            ListViewFile(recorderViewModel: audioRecorder)
+//        }
+//    }
+//}

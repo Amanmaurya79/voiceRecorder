@@ -1,26 +1,15 @@
 //
-//  AudioRecorder.swift
+//  AudioRecorderSerrvice.swift
 //  VoiceRecorderApp
 //
-//  Created by Aman on 08/09/22.
+//  Created by Aman on 14/09/22.
 //
 
 import Foundation
-import SwiftUI
 import AVFoundation
 
-class AudioRecorder: NSObject, ObservableObject, AVAudioPlayerDelegate {
-    var audioPlayer: AVAudioPlayer!
+class AudioRecorderService {
     var audioRecorder: AVAudioRecorder!
-    
-    @Published var recording = false
-    @Published  var recordings: [Recording] = []
-    @Published var isPlaying = false
-    
-    override init(){
-        super.init()
-        fetchRecordings()
-    }
     
     func startRecording() {
         let recordingSession = AVAudioSession.sharedInstance()
@@ -45,7 +34,6 @@ class AudioRecorder: NSObject, ObservableObject, AVAudioPlayerDelegate {
         do {
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
             audioRecorder.record()
-            recording = true
         } catch {
             print("Could not start recording")
         }
@@ -53,7 +41,5 @@ class AudioRecorder: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     func stopRecording() {
         audioRecorder.stop()
-        recording = false
-        fetchRecordings()
-    }
+    } 
 }
