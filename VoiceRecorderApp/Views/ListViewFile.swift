@@ -8,16 +8,15 @@
 import SwiftUI
 
 struct ListViewFile: View {
-    @StateObject var recorderViewModel: RecorderViewModel
+    @ObservedObject var recorderViewModel: RecorderViewModel
     var body: some View {
         List {
             ForEach(recorderViewModel.recordings, id: \.createdAt) { recording in
-                RecordingRow(recorderViewModel: recorderViewModel, audioURL: recording.fileURL)
+                RecordingRow( recorderViewModel: recorderViewModel, audioURL: recording.fileURL)
             }
             .onDelete(perform: delete)
         }.navigationTitle("All Recording")
     }
-    
     func delete(at offsets: IndexSet) {
         var urlsToDelete = [URL]()
         for index in offsets {
@@ -25,15 +24,13 @@ struct ListViewFile: View {
         }
         recorderViewModel.deleteRecording(urlsToDelete: urlsToDelete)
     }
-    
 }
 
 
 struct RecordingRow: View {
-    @StateObject var recorderViewModel: RecorderViewModel
-    var audioURL: URL
+    @ObservedObject var recorderViewModel: RecorderViewModel
     @State var audioIsPlaying: Bool = false
-//    need to give better name
+    var audioURL: URL
     var body: some View {
         HStack {
             VStack {

@@ -9,11 +9,10 @@ import SwiftUI
 
 @main
 struct VoiceRecorderAppApp: App {
-    @StateObject var recorderViewModel: RecorderViewModel = RecorderViewModel()
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                RecorderView(recorderViewModel: recorderViewModel, textSearch: "")
+                RecorderView()
                     .preferredColorScheme(.dark)
             }.navigationTitle("All Recordings")
         }

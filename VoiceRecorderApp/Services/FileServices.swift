@@ -8,6 +8,7 @@
 import Foundation
 
 class FileServices {
+//    need to create a static var for file manager
     
     func fetchRecordings() -> [Recording] {
         var recordings: [Recording] = []

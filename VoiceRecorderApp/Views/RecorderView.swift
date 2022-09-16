@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct RecorderView: View {
-    @StateObject var recorderViewModel: RecorderViewModel
-    @State var textSearch: String
+    @StateObject var recorderViewModel: RecorderViewModel = RecorderViewModel()
+    @State var textSearch: String = ""
     var body: some View {
         VStack {
             SearchBar(textSearch: $textSearch)
@@ -42,10 +42,9 @@ struct SearchBar: View {
 }
 
 //struct ContentView_Previews: PreviewProvider {
-//    @StateObject static var audioRecorder: RecorderViewModel = RecorderViewModel()
 //    static var previews: some View {
 //        NavigationView {
-//            ListViewFile(recorderViewModel: audioRecorder)
+//            ListViewFile()
 //        }
 //    }
 //}
