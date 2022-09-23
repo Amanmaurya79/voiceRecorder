@@ -9,12 +9,14 @@ import SwiftUI
 
 @main
 struct VoiceRecorderAppApp: App {
+//    @StateObject var recorderViewObject: RecorderViewModel = RecorderViewModel()
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                RecorderView()
+                FilesView()
+                    
                     .preferredColorScheme(.dark)
-            }.navigationTitle("All Recordings")
+            }
         }
     }
 }

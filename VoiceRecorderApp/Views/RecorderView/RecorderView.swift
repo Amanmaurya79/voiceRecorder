@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct RecorderView: View {
-    @StateObject var recorderViewModel: RecorderViewModel = RecorderViewModel()
-    @State var textSearch: String = ""
+    var folder: Folder
+    @ObservedObject var recorderViewModel: RecorderViewModel
     var body: some View {
         VStack {
-            SearchBar(textSearch: $textSearch)
-            ListViewFile(recorderViewModel: recorderViewModel)
+            RecordingListView(folder: folder, recorderViewModel: recorderViewModel)
             Spacer()
             Button(action: {
                 recorderViewModel.isRecording ? recorderViewModel.stopRecording() : recorderViewModel.startRecording()
@@ -27,17 +26,6 @@ struct RecorderView: View {
                     .padding(.bottom, 40)
             }
         } 
-    }
-}
-
-
-struct SearchBar: View {
-    @Binding var textSearch: String
-    var body: some View {
-        HStack {
-             Image(systemName: "magnifyingglass")
-            TextField("Search ...", text: $textSearch).foregroundColor(.white)
-         }.padding(.leading, 13)
     }
 }
 

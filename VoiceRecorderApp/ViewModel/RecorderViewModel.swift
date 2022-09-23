@@ -8,18 +8,21 @@
 import Foundation
 import SwiftUI
 
+
 class RecorderViewModel: ObservableObject {
-   private var audioRecorderService: AudioRecorderService = AudioRecorderService()
-   private var fileService: FileServices = FileServices()
-   private var audioPlayerService: AudioPlayerServices = AudioPlayerServices()
+    private var audioRecorderService: AudioRecorderService = AudioRecorderService()
+    private var coreDataServices: CoreDataServices = CoreDataServices()
+    private var audioPlayerService: AudioPlayerServices = AudioPlayerServices()
     
     @Published private(set) var recordings: [Recording] = []
+    @Published private(set) var folders: [Folder] = []
     @Published var isRecording = false
     @Published var isPlaying = false
     
     init() {
         DispatchQueue.main.async {
-            self.recordings = self.fileService.fetchRecordings()
+            self.recordings = self.coreDataServices.recordings
+            self.folders = self.coreDataServices.folder
         }
     }
     
@@ -33,13 +36,13 @@ class RecorderViewModel: ObservableObject {
     func stopRecording() {
         audioRecorderService.stopRecording()
         DispatchQueue.main.async {
-            self.recordings = self.fileService.fetchRecordings()
+            self.recordings = self.coreDataServices.recordings
             self.isRecording = false
         }
     }
     
-    func startPlayback(audio: URL) {
-        audioPlayerService.startPlayback(audio: audio)
+    func startPlayback(recording: Recording) {
+        audioPlayerService.startPlayback(recording: recording)
         DispatchQueue.main.async {
             self.isPlaying = true
         }
@@ -52,10 +55,26 @@ class RecorderViewModel: ObservableObject {
         }
     }
     
-    func deleteRecording(urlsToDelete: [URL]) {
-        fileService.deleteRecording(urlsToDelete: urlsToDelete)
+    func deleteRecording(indexSet: IndexSet) {
+        coreDataServices.deleteRecording(indexSet: indexSet)
         DispatchQueue.main.async {
-            self.recordings = self.fileService.fetchRecordings()
+            self.recordings = self.coreDataServices.recordings
         }
     }
+    
+    func createFolder(name: String) {
+        coreDataServices.addNewFolder(name: name)
+        DispatchQueue.main.async {
+            self.folders = self.coreDataServices.folder
+        }
+    }
+    
+    func deleteFolder(index: IndexSet) {
+        coreDataServices.deleteFolder(indexSet: index)
+        DispatchQueue.main.async {
+            self.folders = self.coreDataServices.folder
+        }
+    }
+    
+    
 }

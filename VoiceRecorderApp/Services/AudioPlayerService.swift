@@ -12,7 +12,8 @@ import AVFoundation
 class AudioPlayerServices: NSObject, AVAudioPlayerDelegate {
     var audioPlayer: AVAudioPlayer!
     
-    func startPlayback(audio: URL) {
+    func startPlayback(recording: Recording) {
+        if let recordingData = recording.fileURL {
         let playbackSession = AVAudioSession.sharedInstance()
         
         do {
@@ -22,11 +23,14 @@ class AudioPlayerServices: NSObject, AVAudioPlayerDelegate {
         }
         
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf: audio)
+            audioPlayer = try AVAudioPlayer(data: recordingData)
             audioPlayer.delegate = self
             audioPlayer.play()
         } catch {
             print("Playback failed.")
+        }
+        } else {
+            print("Play Recording - Could not get the recording data")
         }
         
     }
