@@ -21,7 +21,7 @@ struct TextFieldView: View {
                 }
                 
                 Button {
-                    recorderViewModel.createFolder(name: folderName)
+                    recorderViewModel.addNewFolder(name: folderName)
                 } label: {
                     Text("save")
                 }

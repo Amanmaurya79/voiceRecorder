@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FileServices {
+//class FileServices {
 //    need to create a static var for file manager
     
 //    func fetchRecordings() -> [Recording] {
@@ -23,4 +23,4 @@ class FileServices {
 //        return recordings
 //    }
     
-}
+//}

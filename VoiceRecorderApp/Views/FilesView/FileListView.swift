@@ -13,10 +13,10 @@ struct FileListView: View {
         List {
             ForEach(recorderViewModel.folders, id: \.self) { folder in
                 NavigationLink(folder.name ?? "Recording" ) {
-                    RecorderView(folder: folder, recorderViewModel: recorderViewModel)
+                    RecorderView(recorderViewModel: recorderViewModel)
                 }
             }
-            .onDelete(perform: recorderViewModel.deleteFolder(index:))
+            .onDelete(perform: recorderViewModel.deleteFolder(indexSet:))
         }
     }
 }

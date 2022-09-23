@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct RecorderView: View {
-    var folder: Folder
     @ObservedObject var recorderViewModel: RecorderViewModel
     var body: some View {
         VStack {
-            RecordingListView(folder: folder, recorderViewModel: recorderViewModel)
+            RecordingListView(recorderViewModel: recorderViewModel)
             Spacer()
             Button(action: {
                 recorderViewModel.isRecording ? recorderViewModel.stopRecording() : recorderViewModel.startRecording()
@@ -28,6 +27,8 @@ struct RecorderView: View {
         } 
     }
 }
+
+
 
 //struct ContentView_Previews: PreviewProvider {
 //    static var previews: some View {

@@ -8,19 +8,14 @@
 import SwiftUI
 
 struct RecordingListView: View {
-    var folder: Folder
     @ObservedObject var recorderViewModel: RecorderViewModel
     var body: some View {
         List {
-            if let methods = folder.folderToRecording?.allObjects as? [Recording] {
-                ForEach(methods, id: \.id) { method in
-                    if let fileURL = method.fileURL {
-                        Text("\(fileURL)")
-                    }
+            ForEach(recorderViewModel.recordings, id: \.createdAt) { recording in
+                RecordingRow( recorderViewModel: recorderViewModel, recording: recording)
             }
+            .onDelete(perform: recorderViewModel.deleteRecording(indexSet:))
         }
-//            .onDelete(perform: recorderViewModel.deleteRecording(indexSet:))
-        }.navigationTitle("All Recording")
     }
 
 }
@@ -48,9 +43,9 @@ struct RecordingRow: View {
     }
 }
 
-//struct RecordingListView_Previews: PreviewProvider {
-//    @StateObject static var recorderViewModel: RecorderViewModel = RecorderViewModel()
-//    static var previews: some View {
-//        RecordingListView(recorderViewModel: recorderViewModel)
-//    }
-//}
+struct RecordingListView_Previews: PreviewProvider {
+    @StateObject static var recorderViewModel: RecorderViewModel = RecorderViewModel()
+    static var previews: some View {
+        RecordingListView(recorderViewModel: recorderViewModel)
+    }
+}
