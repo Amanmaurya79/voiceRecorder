@@ -28,8 +28,10 @@ struct RecordingRow: View {
     var body: some View {
         HStack {
             VStack {
-                Text("\(recording)")
-                    .font(.callout)
+                if let createdAt = recording.createdAt {
+                    Text((createdAt),style: .date)
+                        .font(.callout)
+                }
             }
             Spacer()
             Button(action: {

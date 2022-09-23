@@ -14,7 +14,6 @@ struct VoiceRecorderAppApp: App {
         WindowGroup {
             NavigationView {
                 FilesView()
-                    
                     .preferredColorScheme(.dark)
             }
         }
