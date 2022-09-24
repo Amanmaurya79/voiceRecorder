@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		070CFC7128D1D7E200F05CEE /* AudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070CFC7028D1D7E200F05CEE /* AudioRecorderService.swift */; };
-		0725CE8D28D0FF9C00885AF4 /* FileServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0725CE8C28D0FF9C00885AF4 /* FileServices.swift */; };
 		07376B5D28C9D1F6006DBBEA /* VoiceRecorderAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07376B5C28C9D1F6006DBBEA /* VoiceRecorderAppApp.swift */; };
 		07376B5F28C9D1F6006DBBEA /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07376B5E28C9D1F6006DBBEA /* RecorderView.swift */; };
 		07376B6128C9D1F7006DBBEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07376B6028C9D1F7006DBBEA /* Assets.xcassets */; };
@@ -25,14 +24,12 @@
 		077128A228DD7663009EAB9E /* Recording+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0771289E28DD7663009EAB9E /* Recording+CoreDataProperties.swift */; };
 		077128A328DD7663009EAB9E /* Folder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0771289F28DD7663009EAB9E /* Folder+CoreDataClass.swift */; };
 		077128A428DD7663009EAB9E /* Folder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077128A028DD7663009EAB9E /* Folder+CoreDataProperties.swift */; };
-		0799ED4628DC84FB007E5538 /* CoreDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0799ED4528DC84FB007E5538 /* CoreDataServices.swift */; };
 		0799ED4928DC8574007E5538 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0799ED4828DC8574007E5538 /* CoreDataManager.swift */; };
 		07FF352928CD7DA200949580 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FF352828CD7DA200949580 /* AudioPlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		070CFC7028D1D7E200F05CEE /* AudioRecorderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderService.swift; sourceTree = "<group>"; };
-		0725CE8C28D0FF9C00885AF4 /* FileServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileServices.swift; sourceTree = "<group>"; };
 		07376B5928C9D1F6006DBBEA /* VoiceRecorderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceRecorderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07376B5C28C9D1F6006DBBEA /* VoiceRecorderAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderAppApp.swift; sourceTree = "<group>"; };
 		07376B5E28C9D1F6006DBBEA /* RecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderView.swift; sourceTree = "<group>"; };
@@ -51,7 +48,6 @@
 		0771289E28DD7663009EAB9E /* Recording+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recording+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0771289F28DD7663009EAB9E /* Folder+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataClass.swift"; sourceTree = "<group>"; };
 		077128A028DD7663009EAB9E /* Folder+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		0799ED4528DC84FB007E5538 /* CoreDataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServices.swift; sourceTree = "<group>"; };
 		0799ED4828DC8574007E5538 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		07FF352828CD7DA200949580 /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,8 +139,6 @@
 			children = (
 				0737B2D328D065F800C781B3 /* AudioPlayerService.swift */,
 				070CFC7028D1D7E200F05CEE /* AudioRecorderService.swift */,
-				0725CE8C28D0FF9C00885AF4 /* FileServices.swift */,
-				0799ED4528DC84FB007E5538 /* CoreDataServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -271,7 +265,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0771288F28DD19FC009EAB9E /* FilesView.swift in Sources */,
-				0725CE8D28D0FF9C00885AF4 /* FileServices.swift in Sources */,
 				0799ED4928DC8574007E5538 /* CoreDataManager.swift in Sources */,
 				0737B2D428D065F800C781B3 /* AudioPlayerService.swift in Sources */,
 				07376B6E28C9D298006DBBEA /* RecorderViewModel.swift in Sources */,
@@ -282,7 +275,6 @@
 				077128A128DD7663009EAB9E /* Recording+CoreDataClass.swift in Sources */,
 				0771289C28DD7648009EAB9E /* RecordingModel.xcdatamodeld in Sources */,
 				077128A328DD7663009EAB9E /* Folder+CoreDataClass.swift in Sources */,
-				0799ED4628DC84FB007E5538 /* CoreDataServices.swift in Sources */,
 				07FF352928CD7DA200949580 /* AudioPlayerView.swift in Sources */,
 				07376B7428C9D2E3006DBBEA /* DateStringExtension.swift in Sources */,
 				077128A228DD7663009EAB9E /* Recording+CoreDataProperties.swift in Sources */,

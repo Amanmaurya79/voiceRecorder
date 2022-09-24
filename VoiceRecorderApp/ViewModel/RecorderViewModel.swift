@@ -33,10 +33,11 @@ class RecorderViewModel: ObservableObject {
         }
     }
     
-    func stopRecording() {
+    func stopRecording(folder: Folder) {
         audioRecorderService.stopRecording()
         DispatchQueue.main.async {
             self.isRecording = false
+            self.saveRecordingOnCoreData(folder: folder)
             self.fetchRequestRecording()
         }
     }
@@ -55,28 +56,7 @@ class RecorderViewModel: ObservableObject {
         }
     }
     
-//    func deleteRecording(indexSet: IndexSet) {
-//        coreDataServices.deleteRecording(indexSet: indexSet)
-//        DispatchQueue.main.async {
-//            self.recordings = self.coreDataServices.recordings
-//        }
-//    }
-    
-//    func createFolder(name: String) {
-//        coreDataServices.addNewFolder(name: name)
-//        DispatchQueue.main.async {
-//            self.folders = self.coreDataServices.folder
-//        }
-//    }
-    
-//    func deleteFolder(index: IndexSet) {
-//        coreDataServices.deleteFolder(indexSet: index)
-//        DispatchQueue.main.async {
-//            self.folders = self.coreDataServices.folder
-//        }
-//    }
-    
-//MARK: core Data
+// MARK: core Data
     func saveData() {
         manager.save()
         fetchRequestFolder()
@@ -108,6 +88,19 @@ class RecorderViewModel: ObservableObject {
         saveData()
     }
   
+    func saveRecordingOnCoreData(folder: Folder) {
+        let newRecording = Recording(context:  manager.container.viewContext)
+        newRecording.fileURL = audioRecorderService.recordingData
+        newRecording.createdAt = Date()
+        folder.addToFolderToRecording(newRecording)
+        
+        manager.save()
+            print("Stop Recording - Successfully saved to CoreData")
+            // delete the recording stored in the temporary directory
+        audioRecorderService.deleteRecordingFile()
+    }
+    
+    
   func deleteFolder(indexSet: IndexSet) {
       guard let index = indexSet.first else { return }
       let entityOffolder = folders[index]
@@ -121,6 +114,5 @@ class RecorderViewModel: ObservableObject {
       manager.container.viewContext.delete(entityOfRecording)
       saveData()
   }
-    
     
 }

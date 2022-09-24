@@ -8,21 +8,28 @@
 import SwiftUI
 
 struct RecordingListView: View {
+    var folder: Folder
     @ObservedObject var recorderViewModel: RecorderViewModel
     var body: some View {
         List {
-            ForEach(recorderViewModel.recordings, id: \.createdAt) { recording in
-                RecordingRow( recorderViewModel: recorderViewModel, recording: recording)
+            if let recordings = folder.folderToRecording?.allObjects as? [Recording] {
+                ForEach(recordings.sorted(by: {$0.createdAt ?? Date() < $1.createdAt ?? Date()}), id: \.id) { record in
+                    if let createdAt = record.createdAt {
+                        Text("\(createdAt)")
+                            .padding(.vertical, 5)
+                    }
+                    //                        .onDelete(perform: recorderViewModel.deleteRecording(indexSet:))
+                }
             }
-            .onDelete(perform: recorderViewModel.deleteRecording(indexSet:))
-        }
+            
+        }.listStyle(InsetGroupedListStyle())
+        
     }
-
 }
-
 
 struct RecordingRow: View {
     @ObservedObject var recorderViewModel: RecorderViewModel
+    var folder: Folder
     var recording: Recording
     @State var audioIsPlaying: Bool = false
     var body: some View {
@@ -45,9 +52,10 @@ struct RecordingRow: View {
     }
 }
 
-struct RecordingListView_Previews: PreviewProvider {
-    @StateObject static var recorderViewModel: RecorderViewModel = RecorderViewModel()
-    static var previews: some View {
-        RecordingListView(recorderViewModel: recorderViewModel)
-    }
-}
+
+//struct RecordingListView_Previews: PreviewProvider {
+//    @StateObject static var recorderViewModel: RecorderViewModel = RecorderViewModel()
+//    static var previews: some View {
+//        RecordingListView(recorderViewModel: recorderViewModel)
+//    }
+//}

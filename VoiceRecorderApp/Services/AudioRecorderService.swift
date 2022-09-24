@@ -7,13 +7,13 @@
 
 import Foundation
 import AVFoundation
-import Combine
 import SwiftUI
 
 class AudioRecorderService {
     var audioRecorder: AVAudioRecorder!
-    var coreDataViewModel: CoreDataManager = CoreDataManager()
+    var coreDataManager: CoreDataManager = CoreDataManager()
     var recordingDate: Date?
+    var recordingData: Data?
     var recordingName: String = ""
     var recordingURL: URL?
     
@@ -54,10 +54,10 @@ class AudioRecorderService {
         audioRecorder.stop()
         if let recordingURL = recordingURL {
             do {
-                let recordingDate = try Data(contentsOf: recordingURL)
+                recordingData = try Data(contentsOf: recordingURL)
                 print("Stop Recording - Saving to CoreData")
                 // save the recording to CoreData
-                saveRecordingOnCoreData(recordingData: recordingDate)
+//                saveRecordingOnCoreData(recordingData: recordingDate, folder: <#Folder#>)
             } catch {
                 print("Stop Recording - Could not save to CoreData - Cannot get the recording data from URL: \(error)")
             }
@@ -67,18 +67,7 @@ class AudioRecorderService {
         }
     }
     
-    // MARK: - CoreData --------------------------------------
-    func saveRecordingOnCoreData(recordingData: Data) {
-        let newRecording = Recording(context: coreDataViewModel.container.viewContext)
-        newRecording.fileURL = recordingData
-        newRecording.createdAt = Date()
-
-         coreDataViewModel.save()
-        
-            print("Stop Recording - Successfully saved to CoreData")
-            // delete the recording stored in the temporary directory
-            deleteRecordingFile()
-    }
+    // MARK: - CoreData
     
     func deleteRecordingFile() {
         if let recordingURL =  recordingURL {

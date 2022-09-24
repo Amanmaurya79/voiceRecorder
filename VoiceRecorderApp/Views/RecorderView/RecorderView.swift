@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct RecorderView: View {
+    var folder: Folder
     @ObservedObject var recorderViewModel: RecorderViewModel
     var body: some View {
         VStack {
-            RecordingListView(recorderViewModel: recorderViewModel)
+            RecordingListView(folder: folder, recorderViewModel: recorderViewModel)
             Spacer()
             Button(action: {
-                recorderViewModel.isRecording ? recorderViewModel.stopRecording() : recorderViewModel.startRecording()
+                recorderViewModel.isRecording ? recorderViewModel.stopRecording(folder: folder) : recorderViewModel.startRecording()
             }) {
                 Image(systemName: recorderViewModel.isRecording ? "stop.fill" : "circle.fill" )
                     .resizable()
