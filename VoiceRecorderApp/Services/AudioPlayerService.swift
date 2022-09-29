@@ -13,7 +13,6 @@ class AudioPlayerServices: NSObject, AVAudioPlayerDelegate {
     var audioPlayer: AVAudioPlayer?
     var recordingDuration: Double?
     var recordingCurrentTime: Double?
-    var isPlaying: Bool = false
     
     func startPlayback(recording: Recording) {
         if let recordingData = recording.fileURL {
@@ -28,7 +27,6 @@ class AudioPlayerServices: NSObject, AVAudioPlayerDelegate {
             do {
                 audioPlayer = try AVAudioPlayer(data: recordingData)
                 audioPlayer?.delegate = self
-                isPlaying = true
                 recordingDuration = audioPlayer?.duration
                 recordingCurrentTime = audioPlayer?.currentTime
             } catch {
@@ -42,17 +40,14 @@ class AudioPlayerServices: NSObject, AVAudioPlayerDelegate {
   
     func stopPlayback() {
         audioPlayer?.stop()
-        isPlaying = false
     }
     
     func play() {
         audioPlayer?.play()
-        isPlaying = true
     }
     
     func pause() {
         audioPlayer?.stop()
-        isPlaying = false
     }
     
 }

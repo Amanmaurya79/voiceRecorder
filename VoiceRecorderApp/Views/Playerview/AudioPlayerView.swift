@@ -59,6 +59,7 @@ struct AudioPlayerView: View {
         .onReceive(timer) { _ in
             guard let player = recorderViewModel.audioPlayerService.audioPlayer, !isDragging else { return }
             sliderValue = player.currentTime
+            print(sliderValue)
         }
         Divider()
     }

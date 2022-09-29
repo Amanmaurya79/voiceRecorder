@@ -18,7 +18,7 @@ class RecorderViewModel: ObservableObject {
     @Published var isRecording = false
     @Published var recordingDuration = 0.0
     @Published var recordingCurrentTime = 0.0
-    @Published var isPlaying = false
+//    @Published var isPlaying = false
     @Published var currentlyPlaying: Recording?
     
     init() {
@@ -64,7 +64,6 @@ class RecorderViewModel: ObservableObject {
     
     func play() {
         DispatchQueue.main.async {
-            self.isPlaying = self.audioPlayerService.isPlaying
             self.audioPlayerService.play()
         }
     }
@@ -72,7 +71,6 @@ class RecorderViewModel: ObservableObject {
     func pause() {
         DispatchQueue.main.async {
             self.audioPlayerService.pause()
-            self.isPlaying = self.audioPlayerService.isPlaying
         }
     }
     
