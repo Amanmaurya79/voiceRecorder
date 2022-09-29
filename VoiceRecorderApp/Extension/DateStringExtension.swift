@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 extension Date {
     func toString( dateFormat format  : String ) -> String {
         let dateFormatter = DateFormatter()
@@ -14,12 +15,12 @@ extension Date {
     }
 }
 
-// MARK:  HelperForDate
-    func getCreationDate(for file: URL) -> Date {
-        if let attributes = try? FileManager.default.attributesOfItem(atPath: file.path) as [FileAttributeKey: Any],
-           let creationDate = attributes[FileAttributeKey.creationDate] as? Date {
-            return creationDate
-        } else {
-            return Date()
-        }
-    }
+extension DateComponentsFormatter {
+    static let positional: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.minute, .second]
+        formatter.unitsStyle = .positional
+        formatter.zeroFormattingBehavior = .pad
+        return formatter
+    }()
+}

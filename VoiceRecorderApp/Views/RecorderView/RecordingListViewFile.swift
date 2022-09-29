@@ -8,18 +8,17 @@
 import SwiftUI
 
 struct RecordingListView: View {
-    var folder: Folder
     @ObservedObject var recorderViewModel: RecorderViewModel
+    var folder: Folder
     var body: some View {
         List {
             if let recordings = folder.folderToRecording?.allObjects as? [Recording] {
-                ForEach(recordings.sorted(by: {$0.createdAt ?? Date() < $1.createdAt ?? Date()}), id: \.id) { record in
+                ForEach(recordings.sorted(by: {$0.createdAt ?? Date() < $1.createdAt ?? Date()}), id: \.self) { record in
                     if let createdAt = record.createdAt {
-                        Text("\(createdAt)")
-                            .padding(.vertical, 5)
+                        RecordingRow(recorderViewModel: recorderViewModel, record: record, createdAt: createdAt)
                     }
-                    //                        .onDelete(perform: recorderViewModel.deleteRecording(indexSet:))
                 }
+                .onDelete(perform: recorderViewModel.deleteRecording(indexSet:))
             }
             
         }.listStyle(InsetGroupedListStyle())
@@ -29,25 +28,26 @@ struct RecordingListView: View {
 
 struct RecordingRow: View {
     @ObservedObject var recorderViewModel: RecorderViewModel
-    var folder: Folder
-    var recording: Recording
-    @State var audioIsPlaying: Bool = false
+    @State var isAudioPlayerPresented: Bool = false
+    var record: Recording
+    var createdAt: Date
     var body: some View {
         HStack {
             VStack {
-                if let createdAt = recording.createdAt {
-                    Text((createdAt),style: .date)
-                        .font(.callout)
-                }
+                Text("\(createdAt)")
+                    .padding(.vertical, 5)
             }
-            Spacer()
-            Button(action: {
-                audioIsPlaying.toggle()
-                recorderViewModel.isPlaying ?  recorderViewModel.stopPlayback() : recorderViewModel.startPlayback(recording: recording)
-            }) {
-                Image(systemName: audioIsPlaying ? "stop.fill" : "play.circle"  )
+            Button {
+                isAudioPlayerPresented.toggle()
+            } label: {
+                Image(systemName: "play.circle")
                     .imageScale(.large)
+                    .foregroundColor(.blue)
             }
+            .sheet(isPresented: $isAudioPlayerPresented, content: {
+                AudioPlayerView(recorderViewModel: recorderViewModel
+                                , record: record)
+            })
         }
     }
 }

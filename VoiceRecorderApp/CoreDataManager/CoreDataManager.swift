@@ -9,6 +9,7 @@ import Foundation
 import CoreData
 
 class CoreDataManager {
+    static let managerInstance: CoreDataManager = CoreDataManager()
     let container: NSPersistentContainer
     init() {
         container = NSPersistentContainer(name: "RecordingModel")

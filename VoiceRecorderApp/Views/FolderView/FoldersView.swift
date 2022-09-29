@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct FilesView: View {
+struct FoldersView: View {
     @StateObject var recorderViewModel: RecorderViewModel = RecorderViewModel()
     @State private var isPresented: Bool = false
     var body: some View {
         VStack {
-            FileListView(recorderViewModel: recorderViewModel)
+            FolderListView(recorderViewModel: recorderViewModel)
             Spacer()
             Button {
                 isPresented.toggle()
@@ -24,7 +24,7 @@ struct FilesView: View {
                     .foregroundColor(.blue)
             }
             .sheet(isPresented: $isPresented, content: {
-                TextFieldView(recorderViewModel: recorderViewModel)
+                FolderTextFieldView(recorderViewModel: recorderViewModel)
             })
             .navigationTitle("All Recording")
         }
@@ -33,8 +33,8 @@ struct FilesView: View {
 
 
 
-//struct FolderListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FolderView()
-//    }
-//}
+struct FolderListView_Previews: PreviewProvider {
+    static var previews: some View {
+        FoldersView()
+    }
+}

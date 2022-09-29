@@ -6,25 +6,27 @@
 //
 
 import Foundation
-import SwiftUI
 import CoreData
-
 
 class RecorderViewModel: ObservableObject {
     private var audioRecorderService: AudioRecorderService = AudioRecorderService()
-//    private var coreDataServices: CoreDataServices = CoreDataServices()
-    private var audioPlayerService: AudioPlayerServices = AudioPlayerServices()
-    private let manager = CoreDataManager()
+    var audioPlayerService: AudioPlayerServices = AudioPlayerServices()
+    private var manager: CoreDataManager = CoreDataManager.managerInstance
     
     @Published private(set) var recordings: [Recording] = []
     @Published private(set) var folders: [Folder] = []
     @Published var isRecording = false
+    @Published var recordingDuration = 0.0
+    @Published var recordingCurrentTime = 0.0
     @Published var isPlaying = false
+    @Published var currentlyPlaying: Recording?
     
     init() {
         fetchRequestFolder()
         fetchRequestRecording()
     }
+    
+    //    MARK: Recording -
     
     func startRecording() {
         audioRecorderService.startRecording()
@@ -42,21 +44,40 @@ class RecorderViewModel: ObservableObject {
         }
     }
     
+    
     func startPlayback(recording: Recording) {
         audioPlayerService.startPlayback(recording: recording)
         DispatchQueue.main.async {
-            self.isPlaying = true
+            self.currentlyPlaying = recording
+            self.recordingDuration = self.audioPlayerService.recordingDuration ?? 0.0
+            self.recordingCurrentTime = self.audioPlayerService.recordingCurrentTime ?? 0.0
         }
     }
+    
     
     func stopPlayback() {
         audioPlayerService.stopPlayback()
         DispatchQueue.main.async {
-            self.isPlaying = false
+            self.currentlyPlaying = nil
         }
     }
     
-// MARK: core Data
+    func play() {
+        DispatchQueue.main.async {
+            self.isPlaying = self.audioPlayerService.isPlaying
+            self.audioPlayerService.play()
+        }
+    }
+    
+    func pause() {
+        DispatchQueue.main.async {
+            self.audioPlayerService.pause()
+            self.isPlaying = self.audioPlayerService.isPlaying
+        }
+    }
+    
+    
+    // MARK: core Data
     func saveData() {
         manager.save()
         fetchRequestFolder()
@@ -87,7 +108,7 @@ class RecorderViewModel: ObservableObject {
         folder.date = Date()
         saveData()
     }
-  
+    
     func saveRecordingOnCoreData(folder: Folder) {
         let newRecording = Recording(context:  manager.container.viewContext)
         newRecording.fileURL = audioRecorderService.recordingData
@@ -95,24 +116,25 @@ class RecorderViewModel: ObservableObject {
         folder.addToFolderToRecording(newRecording)
         
         manager.save()
-            print("Stop Recording - Successfully saved to CoreData")
-            // delete the recording stored in the temporary directory
+        print("Stop Recording - Successfully saved to CoreData")
+        // delete the recording stored in the temporary directory
         audioRecorderService.deleteRecordingFile()
     }
     
     
-  func deleteFolder(indexSet: IndexSet) {
-      guard let index = indexSet.first else { return }
-      let entityOffolder = folders[index]
-      manager.container.viewContext.delete(entityOffolder)
-      saveData()
-  }
-  
-  func deleteRecording(indexSet: IndexSet) {
-      guard let index = indexSet.first else { return }
-      let entityOfRecording = recordings[index]
-      manager.container.viewContext.delete(entityOfRecording)
-      saveData()
-  }
+    func deleteFolder(indexSet: IndexSet) {
+        guard let index = indexSet.first else { return }
+        let entityOffolder = folders[index]
+        manager.container.viewContext.delete(entityOffolder)
+        saveData()
+    }
+    
+    func deleteRecording(indexSet: IndexSet) {
+        guard let index = indexSet.first else { return }
+        let entityOfRecording = recordings[index]
+        manager.container.viewContext.delete(entityOfRecording)
+        saveData()
+        fetchRequestRecording()
+    }
     
 }

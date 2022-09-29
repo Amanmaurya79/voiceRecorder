@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TextFieldView: View {
+struct FolderTextFieldView: View {
     @ObservedObject var recorderViewModel: RecorderViewModel
     @State private var folderName: String = ""
     var body: some View {

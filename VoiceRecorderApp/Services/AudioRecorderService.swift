@@ -7,11 +7,9 @@
 
 import Foundation
 import AVFoundation
-import SwiftUI
 
 class AudioRecorderService {
     var audioRecorder: AVAudioRecorder!
-    var coreDataManager: CoreDataManager = CoreDataManager()
     var recordingDate: Date?
     var recordingData: Data?
     var recordingName: String = ""
@@ -56,18 +54,13 @@ class AudioRecorderService {
             do {
                 recordingData = try Data(contentsOf: recordingURL)
                 print("Stop Recording - Saving to CoreData")
-                // save the recording to CoreData
-//                saveRecordingOnCoreData(recordingData: recordingDate, folder: <#Folder#>)
             } catch {
                 print("Stop Recording - Could not save to CoreData - Cannot get the recording data from URL: \(error)")
             }
-            
         } else {
             print("Stop Recording -  Could not save to CoreData - Cannot find the recording URL")
         }
     }
-    
-    // MARK: - CoreData
     
     func deleteRecordingFile() {
         if let recordingURL =  recordingURL {
