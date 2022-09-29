@@ -6,22 +6,27 @@
 //
 
 import Foundation
-import SwiftUI
+import CoreData
 
 class RecorderViewModel: ObservableObject {
-   private var audioRecorderService: AudioRecorderService = AudioRecorderService()
-   private var fileService: FileServices = FileServices()
-   private var audioPlayerService: AudioPlayerServices = AudioPlayerServices()
+    private var audioRecorderService: AudioRecorderService = AudioRecorderService()
+    var audioPlayerService: AudioPlayerServices = AudioPlayerServices()
+    private var manager: CoreDataManager = CoreDataManager.managerInstance
     
     @Published private(set) var recordings: [Recording] = []
+    @Published private(set) var folders: [Folder] = []
     @Published var isRecording = false
-    @Published var isPlaying = false
+    @Published var recordingDuration = 0.0
+    @Published var recordingCurrentTime = 0.0
+//    @Published var isPlaying = false
+    @Published var currentlyPlaying: Recording?
     
     init() {
-        DispatchQueue.main.async {
-            self.recordings = self.fileService.fetchRecordings()
-        }
+        fetchRequestFolder()
+        fetchRequestRecording()
     }
+    
+    //    MARK: Recording -
     
     func startRecording() {
         audioRecorderService.startRecording()
@@ -30,32 +35,104 @@ class RecorderViewModel: ObservableObject {
         }
     }
     
-    func stopRecording() {
+    func stopRecording(folder: Folder) {
         audioRecorderService.stopRecording()
         DispatchQueue.main.async {
-            self.recordings = self.fileService.fetchRecordings()
             self.isRecording = false
+            self.saveRecordingOnCoreData(folder: folder)
+            self.fetchRequestRecording()
         }
     }
     
-    func startPlayback(audio: URL) {
-        audioPlayerService.startPlayback(audio: audio)
+    
+    func startPlayback(recording: Recording) {
+        audioPlayerService.startPlayback(recording: recording)
         DispatchQueue.main.async {
-            self.isPlaying = true
+            self.currentlyPlaying = recording
+            self.recordingDuration = self.audioPlayerService.recordingDuration ?? 0.0
+            self.recordingCurrentTime = self.audioPlayerService.recordingCurrentTime ?? 0.0
         }
     }
+    
     
     func stopPlayback() {
         audioPlayerService.stopPlayback()
         DispatchQueue.main.async {
-            self.isPlaying = false
+            self.currentlyPlaying = nil
         }
     }
     
-    func deleteRecording(urlsToDelete: [URL]) {
-        fileService.deleteRecording(urlsToDelete: urlsToDelete)
+    func play() {
         DispatchQueue.main.async {
-            self.recordings = self.fileService.fetchRecordings()
+            self.audioPlayerService.play()
         }
     }
+    
+    func pause() {
+        DispatchQueue.main.async {
+            self.audioPlayerService.pause()
+        }
+    }
+    
+    
+    // MARK: core Data
+    func saveData() {
+        manager.save()
+        fetchRequestFolder()
+        fetchRequestRecording()
+    }
+    
+    func fetchRequestRecording()  {
+        let request = NSFetchRequest<Recording>(entityName: "Recording")
+        do {
+            recordings =  try manager.container.viewContext.fetch(request)
+        } catch let error {
+            print("Error Fetching \(error)")
+        }
+    }
+    
+    func fetchRequestFolder() {
+        let request = NSFetchRequest<Folder>(entityName: "Folder")
+        do {
+            folders =  try manager.container.viewContext.fetch(request)
+        } catch let error {
+            print("Error Fetching \(error)")
+        }
+    }
+    
+    func addNewFolder(name: String) {
+        let folder = Folder(context: manager.container.viewContext)
+        folder.name = name
+        folder.date = Date()
+        saveData()
+    }
+    
+    func saveRecordingOnCoreData(folder: Folder) {
+        let newRecording = Recording(context:  manager.container.viewContext)
+        newRecording.fileURL = audioRecorderService.recordingData
+        newRecording.createdAt = Date()
+        folder.addToFolderToRecording(newRecording)
+        
+        manager.save()
+        print("Stop Recording - Successfully saved to CoreData")
+        // delete the recording stored in the temporary directory
+        audioRecorderService.deleteRecordingFile()
+    }
+    
+    
+    func deleteFolder(indexSet: IndexSet) {
+        guard let index = indexSet.first else { return }
+        let entityOffolder = folders[index]
+        manager.container.viewContext.delete(entityOffolder)
+        saveData()
+    }
+    
+    func deleteRecording(indexSet: IndexSet) {
+        guard let index = indexSet.first else { return }
+        let entityOfRecording = recordings[index]
+        manager.container.viewContext.delete(entityOfRecording)
+        saveData()
+        fetchRequestRecording()
+    }
+    
 }

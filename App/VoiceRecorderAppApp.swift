@@ -12,9 +12,9 @@ struct VoiceRecorderAppApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                RecorderView()
+                FoldersView()
                     .preferredColorScheme(.dark)
-            }.navigationTitle("All Recordings")
+            }
         }
     }
 }

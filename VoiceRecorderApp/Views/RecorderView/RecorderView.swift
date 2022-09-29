@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct RecorderView: View {
-    @StateObject var recorderViewModel: RecorderViewModel = RecorderViewModel()
-    @State var textSearch: String = ""
+    @ObservedObject var recorderViewModel: RecorderViewModel
+    var folder: Folder
     var body: some View {
         VStack {
-            SearchBar(textSearch: $textSearch)
-            ListViewFile(recorderViewModel: recorderViewModel)
+            RecordingListView(recorderViewModel: recorderViewModel, folder: folder)
             Spacer()
             Button(action: {
-                recorderViewModel.isRecording ? recorderViewModel.stopRecording() : recorderViewModel.startRecording()
+                recorderViewModel.isRecording ? recorderViewModel.stopRecording(folder: folder) : recorderViewModel.startRecording()
             }) {
                 Image(systemName: recorderViewModel.isRecording ? "stop.fill" : "circle.fill" )
                     .resizable()
@@ -31,15 +30,6 @@ struct RecorderView: View {
 }
 
 
-struct SearchBar: View {
-    @Binding var textSearch: String
-    var body: some View {
-        HStack {
-             Image(systemName: "magnifyingglass")
-            TextField("Search ...", text: $textSearch).foregroundColor(.white)
-         }.padding(.leading, 13)
-    }
-}
 
 //struct ContentView_Previews: PreviewProvider {
 //    static var previews: some View {
