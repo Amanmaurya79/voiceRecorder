@@ -16,7 +16,6 @@ struct AudioPlayerView: View {
     let timer = Timer
         .publish(every: 0.1, on: .main, in: .common)
         .autoconnect()
-    
     var body: some View {
         VStack {
             Slider(value: $sliderValue,  in: 0...(recorderViewModel.audioPlayerService.audioPlayer?.duration ?? 0.0 )) { dragging in
@@ -41,7 +40,7 @@ struct AudioPlayerView: View {
             HStack {
                 Button(action: {
                     isPlaying.toggle()
-                    recorderViewModel.isPlaying ?  recorderViewModel.pause() : recorderViewModel.play()
+                    isPlaying ?  recorderViewModel.play() : recorderViewModel.pause()
                 }) {
                     Image(systemName: isPlaying ? "pause.fill" : "play.fill"  )
                         .imageScale(.large)
