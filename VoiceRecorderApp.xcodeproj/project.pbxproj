@@ -94,10 +94,7 @@
 		07376B5028C9D1F6006DBBEA = {
 			isa = PBXGroup;
 			children = (
-				0739D2B928E40D2F00FC0902 /* Recording+CoreDataClass.swift */,
-				0739D2BA28E40D2F00FC0902 /* Recording+CoreDataProperties.swift */,
-				0739D2BB28E40D2F00FC0902 /* Folder+CoreDataClass.swift */,
-				0739D2BC28E40D2F00FC0902 /* Folder+CoreDataProperties.swift */,
+				07AC846F28E5D220002FFA37 /* CoreDataStack */,
 				0771289728DD646F009EAB9E /* App */,
 				07376B5B28C9D1F6006DBBEA /* VoiceRecorderApp */,
 				076F251028E168760034926A /* VoiceRecorderAppTests */,
@@ -214,6 +211,17 @@
 				0799ED4828DC8574007E5538 /* CoreDataManager.swift */,
 			);
 			path = CoreDataManager;
+			sourceTree = "<group>";
+		};
+		07AC846F28E5D220002FFA37 /* CoreDataStack */ = {
+			isa = PBXGroup;
+			children = (
+				0739D2BA28E40D2F00FC0902 /* Recording+CoreDataProperties.swift */,
+				0739D2BB28E40D2F00FC0902 /* Folder+CoreDataClass.swift */,
+				0739D2BC28E40D2F00FC0902 /* Folder+CoreDataProperties.swift */,
+				0739D2B928E40D2F00FC0902 /* Recording+CoreDataClass.swift */,
+			);
+			path = "Core\U0010DataStack";
 			sourceTree = "<group>";
 		};
 		07D52EA928CB560000D802BA /* Extension */ = {
