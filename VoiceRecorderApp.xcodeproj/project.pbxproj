@@ -94,7 +94,7 @@
 		07376B5028C9D1F6006DBBEA = {
 			isa = PBXGroup;
 			children = (
-				07AC846F28E5D220002FFA37 /* CoreDataStack */,
+				07AC846F28E5D220002FFA37 /* CoreDataClass */,
 				0771289728DD646F009EAB9E /* App */,
 				07376B5B28C9D1F6006DBBEA /* VoiceRecorderApp */,
 				076F251028E168760034926A /* VoiceRecorderAppTests */,
@@ -213,7 +213,7 @@
 			path = CoreDataManager;
 			sourceTree = "<group>";
 		};
-		07AC846F28E5D220002FFA37 /* CoreDataStack */ = {
+		07AC846F28E5D220002FFA37 /* CoreDataClass */ = {
 			isa = PBXGroup;
 			children = (
 				0739D2BA28E40D2F00FC0902 /* Recording+CoreDataProperties.swift */,
@@ -221,7 +221,7 @@
 				0739D2BC28E40D2F00FC0902 /* Folder+CoreDataProperties.swift */,
 				0739D2B928E40D2F00FC0902 /* Recording+CoreDataClass.swift */,
 			);
-			path = "Core\U0010DataStack";
+			path = CoreDataClass;
 			sourceTree = "<group>";
 		};
 		07D52EA928CB560000D802BA /* Extension */ = {
