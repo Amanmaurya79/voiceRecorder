@@ -10,15 +10,16 @@ import SwiftUI
 struct AudioPlayerView: View {
     @ObservedObject var recorderViewModel: RecorderViewModel
     @State var sliderValue: Double = 0.0
+    @State var endingTime: Double = 0.0
     @State private var isDragging = false
     @State private var isPlaying = false
     var record: Recording
     let timer = Timer
-        .publish(every: 0.1, on: .main, in: .common)
+        .publish(every: 0.01, on: .main, in: .common)
         .autoconnect()
     var body: some View {
         VStack {
-            Slider(value: $sliderValue,  in: 0...(recorderViewModel.audioPlayerService.audioPlayer?.duration ?? 0.0 )) { dragging in
+            Slider(value: $sliderValue,  in: 0...endingTime) { dragging in
                 print("Editing the slider: \(dragging)")
                 isDragging = dragging
                 if !dragging {
@@ -53,13 +54,13 @@ struct AudioPlayerView: View {
             }
         }
         .onAppear {
-            sliderValue = 0
             recorderViewModel.startPlayback(recording: record)
         }
         .onReceive(timer) { _ in
             guard let player = recorderViewModel.audioPlayerService.audioPlayer, !isDragging else { return }
             sliderValue = player.currentTime
-            print(sliderValue)
+            endingTime = player.duration
+            print(String(format: "slidervalue: %.1f", sliderValue))
         }
         Divider()
     }
