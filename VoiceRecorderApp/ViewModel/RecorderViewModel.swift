@@ -10,7 +10,7 @@ import CoreData
 
 class RecorderViewModel: ObservableObject {
     private var audioRecorderService: AudioRecorderService = AudioRecorderService()
-    var audioPlayerService: AudioPlayerServices = AudioPlayerServices()
+    private(set) var audioPlayerService: AudioPlayerServices = AudioPlayerServices()
     private var manager: CoreDataManager = CoreDataManager.managerInstance
     
     @Published private(set) var recordings: [Recording] = []
@@ -18,7 +18,6 @@ class RecorderViewModel: ObservableObject {
     @Published var isRecording = false
     @Published var recordingDuration = 0.0
     @Published var recordingCurrentTime = 0.0
-//    @Published var isPlaying = false
     @Published var currentlyPlaying: Recording?
     
     init() {
