@@ -8,18 +8,53 @@
 import Foundation
 import CoreData
 
-class CoreDataServices {
-    private var manager: CoreDataManager = CoreDataManager.managerInstance
+protocol RecordingServiceProtocol {
+    var persistentContainer: NSPersistentContainer { get }
+    func save()
+    func fetchRequestRecording() -> [Recording]
+    func fetchRequestFolder() -> [Folder]
+    func addNewFolder(name: String)
+    func saveRecordingOnCoreData(folder: Folder, audioRecorderServices: AudioRecorderService)
+    func deleteFolder(entityOffolder: Folder)
+    func deleteRecording(entityOfRecording: Recording)
+}
+
+
+class CoreDataServices: RecordingServiceProtocol {
     
-    func saveData() {
-        manager.save()
+    enum StorageType {
+        case persistent, inMemory
+    }
+    
+    let persistentContainer: NSPersistentContainer
+    init(_ storageType: StorageType = .persistent) {
+        persistentContainer = NSPersistentContainer(name: "RecordingModel")
+        
+        if storageType == .inMemory {
+            let description = NSPersistentStoreDescription()
+            description.url = URL(fileURLWithPath: "/dev/null")
+            self.persistentContainer.persistentStoreDescriptions = [description]
+        }
+        persistentContainer.loadPersistentStores { description, error in
+            if let error = error {
+                print("\(error)")
+            }
+        }
+    }
+    
+    func save() {
+        do {
+            try persistentContainer.viewContext.save()
+        } catch let error {
+            print(error)
+        }
     }
     
     func fetchRequestRecording() -> [Recording] {
         var recordings: [Recording] = []
         let request = NSFetchRequest<Recording>(entityName: "Recording")
         do {
-            recordings =  try manager.container.viewContext.fetch(request)
+            recordings =  try persistentContainer.viewContext.fetch(request)
         } catch let error {
             print("Error Fetching \(error)")
         }
@@ -30,7 +65,7 @@ class CoreDataServices {
         var folders: [Folder] = []
         let request = NSFetchRequest<Folder>(entityName: "Folder")
         do {
-            folders =  try manager.container.viewContext.fetch(request)
+            folders =  try persistentContainer.viewContext.fetch(request)
         } catch let error {
             print("Error Fetching \(error)")
         }
@@ -38,28 +73,28 @@ class CoreDataServices {
     }
     
     func addNewFolder(name: String) {
-        let folder = Folder(context: manager.container.viewContext)
+        let folder = Folder(context: persistentContainer.viewContext)
         folder.name = name
         folder.date = Date()
-        saveData()
+        save()
     }
     
     func saveRecordingOnCoreData(folder: Folder, audioRecorderServices: AudioRecorderService) {
-        let newRecording = Recording(context:  manager.container.viewContext)
+        let newRecording = Recording(context:  persistentContainer.viewContext)
         newRecording.fileURL = audioRecorderServices.recordingData
         newRecording.createdAt = Date()
         folder.addToFolderToRecording(newRecording)
-        saveData()
+        save()
     }
     
     func deleteFolder(entityOffolder: Folder) {
-        manager.container.viewContext.delete(entityOffolder)
-        saveData()
+        persistentContainer.viewContext.delete(entityOffolder)
+        save()
     }
     
     func deleteRecording(entityOfRecording: Recording) {
-        manager.container.viewContext.delete(entityOfRecording)
-        saveData()
+        persistentContainer.viewContext.delete(entityOfRecording)
+        save()
     }
     
 }

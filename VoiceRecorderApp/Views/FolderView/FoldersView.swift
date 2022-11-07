@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FoldersView: View {
-    @StateObject var recorderViewModel: RecorderViewModel = RecorderViewModel()
+    @StateObject var recorderViewModel: RecorderViewModel = RecorderViewModel(coreDataService: CoreDataServices())
     @State private var isPresented: Bool = false
     var body: some View {
         VStack {

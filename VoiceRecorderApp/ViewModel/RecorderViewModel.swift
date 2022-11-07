@@ -6,12 +6,12 @@
 //
 
 import Foundation
-import CoreData
+
 
 class RecorderViewModel: ObservableObject {
     private var audioRecorderService: AudioRecorderService = AudioRecorderService()
-    private(set) var audioPlayerService: AudioPlayerServices = AudioPlayerServices()
-    private var coreDataServices: CoreDataServices = CoreDataServices()
+    private(set) var audioPlayerService: AudioPlayerService = AudioPlayerService()
+    private var coreDataService: RecordingServiceProtocol
     
     @Published private(set) var recordings: [Recording] = []
     @Published private(set) var folders: [Folder] = []
@@ -20,9 +20,10 @@ class RecorderViewModel: ObservableObject {
     @Published var recordingCurrentTime = 0.0
     @Published var currentlyPlaying: Recording?
     
-    init() {
-        self.folders = self.coreDataServices.fetchRequestFolder()
-        self.recordings = self.coreDataServices.fetchRequestRecording()
+    init(coreDataService: RecordingServiceProtocol) {
+        self.coreDataService = coreDataService
+        self.folders = self.coreDataService.fetchRequestFolder()
+        self.recordings = self.coreDataService.fetchRequestRecording()
     }
     
     //    MARK: Recording -
@@ -75,29 +76,28 @@ class RecorderViewModel: ObservableObject {
     
     
     // MARK: core Data
-  
     func fetchRequestRecording()  {
         DispatchQueue.main.async {
-            self.recordings = self.coreDataServices.fetchRequestRecording()
+            self.recordings = self.coreDataService.fetchRequestRecording()
         }
     }
     
     func fetchRequestFolder() {
         DispatchQueue.main.async {
-            self.folders = self.coreDataServices.fetchRequestFolder()
+            self.folders = self.coreDataService.fetchRequestFolder()
         }
     }
     
     func addNewFolder(name: String) {
         DispatchQueue.main.async {
-            self.coreDataServices.addNewFolder(name: name)
-            self.folders = self.coreDataServices.fetchRequestFolder()
+            self.coreDataService.addNewFolder(name: name)
+            self.folders = self.coreDataService.fetchRequestFolder()
         }
     }
     
     func saveRecordingOnCoreData(folder: Folder) {
         DispatchQueue.main.async {
-            self.coreDataServices.saveRecordingOnCoreData(folder: folder, audioRecorderServices: self.audioRecorderService)
+            self.coreDataService.saveRecordingOnCoreData(folder: folder, audioRecorderServices: self.audioRecorderService)
         }
         // delete the recording stored in the temporary directory
         audioRecorderService.deleteRecordingFile()
@@ -108,8 +108,8 @@ class RecorderViewModel: ObservableObject {
         guard let index = indexSet.first else { return }
         let entityOffolder = folders[index]
         DispatchQueue.main.async {
-            self.coreDataServices.deleteFolder(entityOffolder: entityOffolder)
-            self.folders = self.coreDataServices.fetchRequestFolder()
+            self.coreDataService.deleteFolder(entityOffolder: entityOffolder)
+            self.folders = self.coreDataService.fetchRequestFolder()
         }
     }
     
@@ -117,8 +117,8 @@ class RecorderViewModel: ObservableObject {
         guard let index = indexSet.first else { return }
         let entityOfRecording = recordings[index]
         DispatchQueue.main.async {
-            self.coreDataServices.deleteRecording(entityOfRecording: entityOfRecording)
-            self.recordings = self.coreDataServices.fetchRequestRecording()
+            self.coreDataService.deleteRecording(entityOfRecording: entityOfRecording)
+            self.recordings = self.coreDataService.fetchRequestRecording()
         }
     }
 }

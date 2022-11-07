@@ -21,12 +21,11 @@
 		0739D2BF28E40D2F00FC0902 /* Folder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0739D2BB28E40D2F00FC0902 /* Folder+CoreDataClass.swift */; };
 		0739D2C028E40D2F00FC0902 /* Folder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0739D2BC28E40D2F00FC0902 /* Folder+CoreDataProperties.swift */; };
 		07675559291395AF00BAF3FF /* CoreDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07675558291395AF00BAF3FF /* CoreDataServices.swift */; };
-		076F251228E168760034926A /* VoiceRecorderAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076F251128E168760034926A /* VoiceRecorderAppTests.swift */; };
+		076F251228E168760034926A /* CoreDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076F251128E168760034926A /* CoreDataTest.swift */; };
 		0771288F28DD19FC009EAB9E /* FoldersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0771288E28DD19FC009EAB9E /* FoldersView.swift */; };
 		0771289128DD1AF3009EAB9E /* FolderTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0771289028DD1AF3009EAB9E /* FolderTextFieldView.swift */; };
 		0771289528DD43E8009EAB9E /* FolderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0771289428DD43E8009EAB9E /* FolderListView.swift */; };
 		0771289C28DD7648009EAB9E /* RecordingModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0771289A28DD7647009EAB9E /* RecordingModel.xcdatamodeld */; };
-		0799ED4928DC8574007E5538 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0799ED4828DC8574007E5538 /* CoreDataManager.swift */; };
 		07FF352928CD7DA200949580 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FF352828CD7DA200949580 /* AudioPlayerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,12 +57,11 @@
 		0739D2BC28E40D2F00FC0902 /* Folder+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		07675558291395AF00BAF3FF /* CoreDataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServices.swift; sourceTree = "<group>"; };
 		076F250F28E168760034926A /* VoiceRecorderAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoiceRecorderAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		076F251128E168760034926A /* VoiceRecorderAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderAppTests.swift; sourceTree = "<group>"; };
+		076F251128E168760034926A /* CoreDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTest.swift; sourceTree = "<group>"; };
 		0771288E28DD19FC009EAB9E /* FoldersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersView.swift; sourceTree = "<group>"; };
 		0771289028DD1AF3009EAB9E /* FolderTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTextFieldView.swift; sourceTree = "<group>"; };
 		0771289428DD43E8009EAB9E /* FolderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderListView.swift; sourceTree = "<group>"; };
 		0771289B28DD7647009EAB9E /* RecordingModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecordingModel.xcdatamodel; sourceTree = "<group>"; };
-		0799ED4828DC8574007E5538 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		07FF352828CD7DA200949580 /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				0731439628C9E4FD00C1A9B1 /* Models */,
-				0799ED4728DC8557007E5538 /* CoreDataManager */,
 				0737B2D228D065E200C781B3 /* Services */,
 				07376B6A28C9D248006DBBEA /* Views */,
 				07376B6C28C9D259006DBBEA /* ViewModel */,
@@ -168,7 +165,7 @@
 		076F251028E168760034926A /* VoiceRecorderAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				076F251128E168760034926A /* VoiceRecorderAppTests.swift */,
+				076F251128E168760034926A /* CoreDataTest.swift */,
 			);
 			path = VoiceRecorderAppTests;
 			sourceTree = "<group>";
@@ -206,14 +203,6 @@
 				07FF352828CD7DA200949580 /* AudioPlayerView.swift */,
 			);
 			path = Playerview;
-			sourceTree = "<group>";
-		};
-		0799ED4728DC8557007E5538 /* CoreDataManager */ = {
-			isa = PBXGroup;
-			children = (
-				0799ED4828DC8574007E5538 /* CoreDataManager.swift */,
-			);
-			path = CoreDataManager;
 			sourceTree = "<group>";
 		};
 		07AC846F28E5D220002FFA37 /* CoreDataClass */ = {
@@ -337,7 +326,6 @@
 			files = (
 				0771288F28DD19FC009EAB9E /* FoldersView.swift in Sources */,
 				0739D2C028E40D2F00FC0902 /* Folder+CoreDataProperties.swift in Sources */,
-				0799ED4928DC8574007E5538 /* CoreDataManager.swift in Sources */,
 				0737B2D428D065F800C781B3 /* AudioPlayerService.swift in Sources */,
 				07376B6E28C9D298006DBBEA /* RecorderViewModel.swift in Sources */,
 				0771289528DD43E8009EAB9E /* FolderListView.swift in Sources */,
@@ -360,7 +348,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				076F251228E168760034926A /* VoiceRecorderAppTests.swift in Sources */,
+				076F251228E168760034926A /* CoreDataTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

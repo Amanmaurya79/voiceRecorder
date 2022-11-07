@@ -9,7 +9,7 @@ import Foundation
 import AVFoundation
 
 
-class AudioPlayerServices: NSObject, AVAudioPlayerDelegate {
+class AudioPlayerService: NSObject, AVAudioPlayerDelegate {
     var audioPlayer: AVAudioPlayer?
     var recordingDuration: Double?
     var recordingCurrentTime: Double?
